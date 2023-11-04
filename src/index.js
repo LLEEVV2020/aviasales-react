@@ -5,6 +5,7 @@ import './index.css'
 
 import App from './components/app'
 //import store from './store/store'
+import { createApi } from './api'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
@@ -12,6 +13,16 @@ root.render(
     <App />
   </React.StrictMode>
 )
+
+let fggfgg = createApi()
+fggfgg()
+  .then((film) => {
+    console.log(film)
+  })
+  .catch((err) => {
+    console.error('Отсутствие фильмов', err)
+  })
+console.log(createApi(fggfgg))
 
 /*
 import { createStore } from 'redux'
