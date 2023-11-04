@@ -31,6 +31,8 @@ npm install lodash --save-dev
 
 npm  install sass
 
+npm i redux react-redux
+
 
 
 
