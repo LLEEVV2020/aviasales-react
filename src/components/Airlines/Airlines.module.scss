@@ -1,0 +1,24 @@
+.airlines {
+  width: 502px;
+
+  @media(max-width: 550px) {
+    width: 100%;
+  }
+}
+
+.airlines__list {
+  margin: 0;
+  padding: 0;
+}
+
+.airlines__item {
+  list-style: none;
+  margin-bottom: 21px;
+}
+
+.airlines__no-flights {
+  text-align: center;
+  font-size: 15px;
+  margin-top: 0;
+  margin-bottom: 95px;
+}
