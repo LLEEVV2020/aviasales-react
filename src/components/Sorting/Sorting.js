@@ -1,6 +1,11 @@
+//import { useSelector } from 'react-redux'
+
 import classes from './Sorting.module.scss'
 
 export default function Sorting({ className }) {
+  //const currentSortType = useSelector((state) => state.flights.sortType)
+  //console.log(currentSortType)
+
   return (
     <section className={`${className} ${classes['sorting']}`}>
       <ul className={classes['sorting__list']}>

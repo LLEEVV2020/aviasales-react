@@ -33,6 +33,11 @@ npm  install sass
 
 npm i redux react-redux
 
+////////////////$Recycle.Bin
+
+npm i  redux-thunk
+npm i  @reduxjs/toolkit
+npm i  axios
 
 
 
