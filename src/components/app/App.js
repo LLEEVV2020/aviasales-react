@@ -18,7 +18,13 @@ function App() {
         </div>
         <div className={classes['app__right-column']}>
           <Sorting className={classes['app__sorting']} />
-          <Progress className={classes['app__progress']} percent={7} showInfo={false} strokeColor={'#2196F3'} />
+          <Progress
+            className={classes['app__progress']}
+            percent={7}
+            showInfo={false}
+            strokeColor={'#2196F3'}
+            style={{ visibility: 'hidden' }}
+          />
           <Airlines />
         </div>
       </div>
