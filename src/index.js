@@ -14,15 +14,21 @@ root.render(
   </React.StrictMode>
 )
 
+//()(console.log("dddddssaa"))
+
 let fggfgg = createApi()
-fggfgg()
+let jjjjjjjj = fggfgg()
   .then((film) => {
-    console.log(film)
+    console.log(film.data.searchId)
+    return film.data.searchId
+  })
+  .then((film2) => {
+    console.log(film2, "jhjjjj")
   })
   .catch((err) => {
     console.error('Отсутствие фильмов', err)
   })
-console.log(createApi(fggfgg))
+console.log(jjjjjjjj)
 
 /*
 import { createStore } from 'redux'
