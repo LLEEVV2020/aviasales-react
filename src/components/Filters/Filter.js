@@ -14,14 +14,28 @@ export default function Filters({ className }) {
   console.log(state2, 'aaaaaa')
 
   const filters = Object.values(FilterType)
+
   function filtersChangeHandler(evt) {
     const isfilterTypeAllChecked = Boolean(currentFilters.find((filter) => filter.name == FilterType.All.name))
     const isAdding = evt.target.checked
     console.log(isAdding, 'isAdding')
     console.log(isfilterTypeAllChecked, 'isfilterTypeAllChecked')
-  }
+    console.log(evt.target.value, 'evt.target.value')
 
-  dispatch(changeFilterTypeAction(currentFilters))
+    let updatedFilters = []
+
+    switch (evt.target.value) {
+      case FilterType.All.value: {
+        if (isAdding) updatedFilters = filters.slice()
+        else updatedFilters = []
+        break
+      }
+    }
+
+    console.log(updatedFilters, 'updatedFilters')
+
+    dispatch(changeFilterTypeAction(updatedFilters))
+  }
 
   return (
     <section className={`${className} ${classes['filters']}`}>
