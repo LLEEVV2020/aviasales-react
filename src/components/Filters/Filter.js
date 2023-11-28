@@ -9,18 +9,18 @@ export default function Filters({ className }) {
   const currentFilters = useSelector((state) => state.flights.filters)
   const dispatch = useDispatch()
 
-  const state2 = useSelector((state) => state.flights)
-  console.log(currentFilters, 'hhhhhhh')
-  console.log(state2, 'aaaaaa')
+  //const state2 = useSelector((state) => state.flights)
+  //console.log(currentFilters, 'hhhhhhh')
+  //console.log(state2, 'aaaaaa')
 
   const filters = Object.values(FilterType)
 
   function filtersChangeHandler(evt) {
     const isfilterTypeAllChecked = Boolean(currentFilters.find((filter) => filter.name == FilterType.All.name))
     const isAdding = evt.target.checked
-    console.log(isAdding, 'isAdding')
-    console.log(isfilterTypeAllChecked, 'isfilterTypeAllChecked')
-    console.log(evt.target.value, 'evt.target.value')
+    //console.log(isAdding, 'isAdding')
+    //console.log(isfilterTypeAllChecked, 'isfilterTypeAllChecked')
+    //console.log(evt.target.value, 'evt.target.value')
 
     let updatedFilters = []
 
@@ -28,6 +28,26 @@ export default function Filters({ className }) {
       case FilterType.All.value: {
         if (isAdding) updatedFilters = filters.slice()
         else updatedFilters = []
+        break
+      }
+      default: {
+        if (isAdding) {
+          const index = filters.findIndex((el) => el.value === evt.target.value)
+          updatedFilters = currentFilters.slice()
+          updatedFilters.push(filters[index])
+          updatedFilters =
+            !isfilterTypeAllChecked && updatedFilters.length === filters.length - 1
+              ? updatedFilters.concat([FilterType.All])
+              : updatedFilters
+          //console.log(index, 'index')
+        } else {
+          const index = currentFilters.findIndex((el) => el.value === evt.target.value)
+          updatedFilters = [...currentFilters.slice(0, index), ...currentFilters.slice(index + 1)]
+          updatedFilters = isfilterTypeAllChecked
+            ? updatedFilters.filter((filter) => filter.name !== FilterType.All.name)
+            : updatedFilters
+          //console.log(index, 'index')
+        }
         break
       }
     }

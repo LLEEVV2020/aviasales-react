@@ -1,14 +1,17 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { changeSortTypeAction } from '../../store/reducer'
 import { SortType } from '../../constants'
 
 import classes from './Sorting.module.scss'
 
 export default function Sorting({ className }) {
   const currentSortType = useSelector((state) => state.flights.sortType)
+  const dispatch = useDispatch()
   const sortTypes = Object.values(SortType)
 
-  console.log(currentSortType)
+  console.log(currentSortType, 'currentSortType')
+  console.log('jjjjjj')
 
   return (
     <section className={`${className} ${classes['sorting']}`}>
@@ -21,8 +24,8 @@ export default function Sorting({ className }) {
               id={sortType.id}
               name={sortType.name}
               value={sortType.value}
-              defaultChecked={true}
-              onChange={(evt) => console.log(evt)}
+              defaultChecked={sortType.id === currentSortType.id}
+              onChange={(evt) => dispatch(changeSortTypeAction(SortType[evt.target.value]))}
             />
             <label className={classes['sorting__label']} htmlFor={sortType.id}>
               {sortType.text}
