@@ -1,10 +1,13 @@
 import { createSlice, current } from '@reduxjs/toolkit'
 
-import { SortType, FilterType } from '../constants'
+import { SortType, FilterType, TOTAL_TICKET_AMOUNT } from '../constants'
 
 const initialState = {
   filters: Object.values(FilterType),
   sortType: SortType.Cheapest,
+  tickets: [],
+  isDataLoadig: true,
+  loadingProgress: 0,
 }
 
 /*function getFilteredTickets(tickets, filters) {
@@ -74,9 +77,26 @@ export const flightsSlice = createSlice({
       const currentState = current(state)
       state.currentTickets = getCurrentTickets(currentState.tickets, currentState.sortType, currentState.filters)
     },
+    setTicketsAction: (state, action) => {
+      state.tickets = action.payload
+      const currentState = current(state)
+      state.currentTickets = getCurrentTickets(currentState.tickets, currentState.sortType, currentState.filters)
+    },
+    toggLoadingAction: (state) => {
+      state.isDataLoadig = !state.isDataLoadig
+    },
+    changeLoadingProgressAction: (state, action) => {
+      state.loadingProgress = Math.round((action.payload / TOTAL_TICKET_AMOUNT) * 100)
+    },
   },
 })
 
-export const { changeFilterTypeAction, changeSortTypeAction } = flightsSlice.actions
+export const {
+  changeFilterTypeAction,
+  changeSortTypeAction,
+  setTicketsAction,
+  toggLoadingAction,
+  changeLoadingProgressAction,
+} = flightsSlice.actions
 
 export default flightsSlice.reducer

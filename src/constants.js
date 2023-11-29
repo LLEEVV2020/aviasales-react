@@ -46,3 +46,5 @@ export const SortType = {
     value: 'Optimal',
   },
 }
+
+export const TOTAL_TICKET_AMOUNT = 8805
