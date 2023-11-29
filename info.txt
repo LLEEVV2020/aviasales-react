@@ -39,7 +39,7 @@ npm i  redux-thunk
 npm i  @reduxjs/toolkit
 npm i  axios
 
-
+npm  install nanoid
 
 
 

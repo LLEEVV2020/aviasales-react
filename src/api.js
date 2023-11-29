@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://aviasales-test-api.kata.academy/search'
+const BASE_URL = 'https://aviasales-test-api.kata.academy'
 const TIMEOUT = 5000
 
 export function createApi() {
