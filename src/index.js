@@ -8,9 +8,9 @@ import store from './store/store'
 import { fetchAllTickets } from './store/async-actions'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-
-let gggg = store.dispatch(fetchAllTickets())
-console.log(gggg, 'gggg')
+store.dispatch(fetchAllTickets())
+//let gggg = store.dispatch(fetchAllTickets())
+//console.log(gggg, 'gggg')
 
 root.render(
   <React.StrictMode>

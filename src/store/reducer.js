@@ -8,9 +8,10 @@ const initialState = {
   tickets: [],
   isDataLoadig: true,
   loadingProgress: 0,
+  currentTickets: [],
 }
 
-/*function getFilteredTickets(tickets, filters) {
+function getFilteredTickets(tickets, filters) {
   const currentFilters = Object.values(FilterType).filter((el) => filters.find((filter) => filter.value === el.value))
   let filteredTickets = []
 
@@ -44,13 +45,19 @@ const initialState = {
   }
 
   return filteredTickets
-}*/
+}
+
+function getSortedTickets(tickets, sortType) {
+  console.log(tickets, 'tickets-----')
+  console.log(sortType, 'sortType-----')
+}
 
 function getCurrentTickets(tickets, sortType, filters) {
-  console.log(tickets, 'tickets')
   console.log(sortType, 'sortType')
-  console.log(filters, 'filters')
-  //const filteredTickets = getFilteredTickets(tickets, filters)
+
+  const filteredTickets = getFilteredTickets(tickets, filters)
+  console.log(filteredTickets, 'filteredTickets===')
+  getSortedTickets(filteredTickets, sortType)
   //const sortedAndFilteredTickets = getSortedTickets(filteredTickets, sortType);
   //console.log(filteredTickets, 'filteredTickets')
   //return sortedAndFilteredTickets;

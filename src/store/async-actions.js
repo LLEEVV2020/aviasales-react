@@ -4,8 +4,8 @@ import { setTicketsAction, toggLoadingAction, changeLoadingProgressAction } from
 
 async function fetchTickets(searchId, api, prevTickets, dispatch) {
   try {
-    console.log(prevTickets, 'prevTickets')
-    console.log(dispatch, 'dispatch')
+    //console.log(prevTickets, 'prevTickets')
+    //console.log(dispatch, 'dispatch')
     const { data } = await api.get(`/tickets?searchId=${searchId}`)
     const newTickets = data.tickets.map((ticket) => ({ ...ticket, id: nanoid() }))
     const tickets = [...prevTickets, ...newTickets]
@@ -35,7 +35,7 @@ export function fetchAllTickets() {
     try {
       const searhResponse = await api.get('/search')
       const searchId = searhResponse.data.searchId
-      console.log(searchId)
+      //console.log(searchId)
       fetchTickets(searchId, api, [], dispatch)
     } catch (err) {
       console.log(err)
