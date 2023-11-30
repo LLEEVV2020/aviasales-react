@@ -1,4 +1,4 @@
-export const TOTAL_TICKET_AMOUNT = 10000
+export const TOTAL_TICKET_AMOUNT = 8805
 export const FilterType = {
   All: {
     text: 'Все',

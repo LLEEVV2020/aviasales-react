@@ -6,11 +6,11 @@ import Button from '../Button'
 
 import classes from './Airlines.module.scss'
 
-const TICKETS_PER_PAGE = 5
-const SHOW_TICKETS_PER_CLICK = 5
+const TICKETS_PAGE = 5
+const SHOW_TICKETS_CLICK = 5
 
 export default function Airlines() {
-  const [showedTicketsAmount, setShowedTicketsAmount] = useState(TICKETS_PER_PAGE)
+  const [showedTicketsAmount, setShowedTicketsAmount] = useState(TICKETS_PAGE)
   const allTickets = useSelector((state) => state.flights.currentTickets)
   const tickets = allTickets.slice(0, showedTicketsAmount)
   return (
@@ -26,7 +26,7 @@ export default function Airlines() {
       )}
 
       <Button
-        onClick={() => setShowedTicketsAmount((prev) => prev + SHOW_TICKETS_PER_CLICK)}
+        onClick={() => setShowedTicketsAmount((prev) => prev + SHOW_TICKETS_CLICK)}
         isShown={tickets.length ? true : false}
       />
     </section>

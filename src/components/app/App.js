@@ -17,7 +17,7 @@ function App() {
   const errorMessage = error?.response?.status ? `${error?.response?.status}: ${error.code}` : error?.code
   const errorDesc = error?.message
 
-  const progressStyles = loadingProgress < 100 && !isError ? { visibility: 'visible' } : { visibility: 'hidden' }
+  const progressStyle = loadingProgress < 100 && !isError ? { visibility: 'visible' } : { visibility: 'hidden' }
 
   return (
     <section className={classes['app']}>
@@ -33,7 +33,7 @@ function App() {
             percent={loadingProgress}
             showInfo={false}
             strokeColor={'#2196F3'}
-            style={progressStyles}
+            style={progressStyle}
           />
           {isLoading ? (
             <Space className={classes['app__spinner-container']}>
