@@ -1,3 +1,4 @@
+export const TOTAL_TICKET_AMOUNT = 10000
 export const FilterType = {
   All: {
     text: 'Все',
@@ -46,5 +47,3 @@ export const SortType = {
     value: 'Optimal',
   },
 }
-
-export const TOTAL_TICKET_AMOUNT = 8805
