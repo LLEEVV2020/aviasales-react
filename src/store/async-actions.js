@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 
-import { setTicketsAction, toggLoadingAction, changeLoadingProgressAction } from './reducer'
+import { setTicketsAction, toggLoadingAction, changeLoadingProgressAction, setErrorAction } from './reducer'
 
 async function fetchTickets(searchId, api, prevTickets, dispatch) {
   try {
@@ -25,6 +25,10 @@ async function fetchTickets(searchId, api, prevTickets, dispatch) {
 
     if (response && response.status === 500) {
       return await fetchTickets(searchId, api, prevTickets, dispatch)
+    } else {
+      dispatch(toggLoadingAction())
+      dispatch(setErrorAction(err))
+      return Promise.resolve(prevTickets)
     }
   }
   //console.log(tickets, 'tickets')
@@ -38,7 +42,8 @@ export function fetchAllTickets() {
       //console.log(searchId)
       fetchTickets(searchId, api, [], dispatch)
     } catch (err) {
-      console.log(err)
+      dispatch(toggLoadingAction())
+      dispatch(setErrorAction(err))
     }
   }
 }

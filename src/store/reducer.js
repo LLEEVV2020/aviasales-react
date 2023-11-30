@@ -9,6 +9,7 @@ const initialState = {
   isDataLoadig: true,
   loadingProgress: 0,
   currentTickets: [],
+  error: null,
 }
 
 function getFilteredTickets(tickets, filters) {
@@ -50,17 +51,54 @@ function getFilteredTickets(tickets, filters) {
 function getSortedTickets(tickets, sortType) {
   console.log(tickets, 'tickets-----')
   console.log(sortType, 'sortType-----')
+  const sortedTickets = tickets.slice()
+
+  switch (sortType.value) {
+    case SortType.Cheapest.value:
+      sortedTickets.sort((a, b) => a.price - b.price)
+      break
+    case SortType.Fastest.value:
+      sortedTickets.sort(
+        (a, b) =>
+          a.segments.reduce((prev, cur) => prev + cur.duration, 0) -
+          b.segments.reduce((prev, cur) => prev + cur.duration, 0)
+      )
+      break
+    case SortType.Optimal.value:
+      sortedTickets.sort((a, b) => {
+        const points = {
+          a: 0,
+          b: 0,
+        }
+
+        const durationA = a.segments.reduce((prev, cur) => prev + cur.duration, 0)
+        const durationB = b.segments.reduce((prev, cur) => prev + cur.duration, 0)
+
+        const stopsA = a.segments.reduce((prev, cur) => prev + cur.stops.length, 0)
+        const stopsB = b.segments.reduce((prev, cur) => prev + cur.stops.length, 0)
+
+        a.price < b.price ? points.a++ : a.price === b.price ? null : points.b++
+        durationA < durationB ? (points.a += 1) : durationA === durationB ? null : (points.b += 1)
+        stopsA < stopsB ? (points.a += 0.5) : stopsA === stopsB ? null : (points.b += 0.5)
+
+        return points.b - points.a
+      })
+      break
+  }
+
+  return sortedTickets
 }
 
 function getCurrentTickets(tickets, sortType, filters) {
-  console.log(sortType, 'sortType')
+  //console.log(sortType, 'sortType')
 
   const filteredTickets = getFilteredTickets(tickets, filters)
-  console.log(filteredTickets, 'filteredTickets===')
-  getSortedTickets(filteredTickets, sortType)
+  //console.log(filteredTickets, 'filteredTickets===')
+  const sortedAndFilteredTickets = getSortedTickets(filteredTickets, sortType)
+  //console.log(sortedAndFilteredTickets, 'sortedAndFilteredTickets=======')
   //const sortedAndFilteredTickets = getSortedTickets(filteredTickets, sortType);
   //console.log(filteredTickets, 'filteredTickets')
-  //return sortedAndFilteredTickets;
+  return sortedAndFilteredTickets
 }
 
 export const flightsSlice = createSlice({
@@ -95,6 +133,9 @@ export const flightsSlice = createSlice({
     changeLoadingProgressAction: (state, action) => {
       state.loadingProgress = Math.round((action.payload / TOTAL_TICKET_AMOUNT) * 100)
     },
+    setErrorAction: (state, action) => {
+      state.error = action.payload
+    },
   },
 })
 
@@ -104,6 +145,7 @@ export const {
   setTicketsAction,
   toggLoadingAction,
   changeLoadingProgressAction,
+  setErrorAction,
 } = flightsSlice.actions
 
 export default flightsSlice.reducer
