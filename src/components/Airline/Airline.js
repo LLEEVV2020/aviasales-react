@@ -1,7 +1,6 @@
 import { Flight } from '../Flight/Flight'
 
 import classes from './Airline.module.scss'
-import companyLogo from './images/company-logo.png'
 
 function getFormattedPrice(price) {
   const thousands = Math.floor(price / 1000)
@@ -28,9 +27,7 @@ export default function Airline({ className, ticket }) {
         <div className={classes['airline__company-logo']}>
           <img
             className={classes['airline__logo-image']}
-            src={companyLogo}
-            width="110"
-            height="36"
+            src={`//pics.avs.io/99/36/${ticket.carrier}.png`}
             alt="company logo"
           />
         </div>

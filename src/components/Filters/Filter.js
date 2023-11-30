@@ -52,7 +52,7 @@ export default function Filters({ className }) {
       }
     }
 
-    console.log(updatedFilters, 'updatedFilters')
+    //console.log(updatedFilters, 'updatedFilters')
 
     dispatch(changeFilterTypeAction(updatedFilters))
   }
