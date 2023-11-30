@@ -4,8 +4,6 @@ import { setTicketsAction, toggLoadingAction, changeLoadingProgressAction, setEr
 
 async function fetchTickets(searchId, api, prevTickets, dispatch) {
   try {
-    //console.log(prevTickets, 'prevTickets')
-    //console.log(dispatch, 'dispatch')
     const { data } = await api.get(`/tickets?searchId=${searchId}`)
     const newTickets = data.tickets.map((ticket) => ({ ...ticket, id: nanoid() }))
     const tickets = [...prevTickets, ...newTickets]
@@ -31,7 +29,6 @@ async function fetchTickets(searchId, api, prevTickets, dispatch) {
       return Promise.resolve(prevTickets)
     }
   }
-  //console.log(tickets, 'tickets')
 }
 
 export function fetchAllTickets() {
@@ -39,7 +36,6 @@ export function fetchAllTickets() {
     try {
       const searhResponse = await api.get('/search')
       const searchId = searhResponse.data.searchId
-      //console.log(searchId)
       fetchTickets(searchId, api, [], dispatch)
     } catch (err) {
       dispatch(toggLoadingAction())

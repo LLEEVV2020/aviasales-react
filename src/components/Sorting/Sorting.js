@@ -10,9 +10,6 @@ export default function Sorting({ className }) {
   const dispatch = useDispatch()
   const sortTypes = Object.values(SortType)
 
-  //console.log(currentSortType, 'currentSortType')
-  //console.log('jjjjjj')
-
   return (
     <section className={`${className} ${classes['sorting']}`}>
       <ul className={classes['sorting__list']}>

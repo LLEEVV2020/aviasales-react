@@ -49,8 +49,6 @@ function getFilteredTickets(tickets, filters) {
 }
 
 function getSortedTickets(tickets, sortType) {
-  console.log(tickets, 'tickets-----')
-  console.log(sortType, 'sortType-----')
   const sortedTickets = tickets.slice()
 
   switch (sortType.value) {
@@ -90,14 +88,9 @@ function getSortedTickets(tickets, sortType) {
 }
 
 function getCurrentTickets(tickets, sortType, filters) {
-  //console.log(sortType, 'sortType')
-
   const filteredTickets = getFilteredTickets(tickets, filters)
-  //console.log(filteredTickets, 'filteredTickets===')
   const sortedAndFilteredTickets = getSortedTickets(filteredTickets, sortType)
-  //console.log(sortedAndFilteredTickets, 'sortedAndFilteredTickets=======')
-  //const sortedAndFilteredTickets = getSortedTickets(filteredTickets, sortType);
-  //console.log(filteredTickets, 'filteredTickets')
+
   return sortedAndFilteredTickets
 }
 
@@ -109,13 +102,6 @@ export const flightsSlice = createSlice({
       state.filters = action.payload
       const currentState = current(state)
       state.currentTickets = getCurrentTickets(currentState.tickets, currentState.sortType, currentState.filters)
-
-      //console.log(currentState, 'currentState')
-      //console.log(state.filters, 'state.filters')
-      //console.log(action.payload, 'action.payload')
-
-      //const currentState = current(state)
-      //state.currentTickets = getCurrentTickets(currentState.tickets, currentState.sortType, currentState.filters)
     },
     changeSortTypeAction: (state, action) => {
       state.sortType = action.payload

@@ -19,11 +19,6 @@ function App() {
 
   const progressStyles = loadingProgress < 100 && !isError ? { visibility: 'visible' } : { visibility: 'hidden' }
 
-  console.log(isLoading, 'isLoading---app')
-  console.log(loadingProgress, 'loadingProgress---app')
-  console.log(progressStyles, 'progressStyles---app')
-  console.log(errorMessage, 'errorMessage---app')
-  console.log(errorDesc, 'errorDesc---app')
   return (
     <section className={classes['app']}>
       <Logo />
