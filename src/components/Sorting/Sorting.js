@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import { changeSortTypeAction } from '../../store/reducer'
+import { changeActionSortType } from '../../store/reducer'
 import { SortType } from '../../constants'
 
 import classes from './Sorting.module.scss'
@@ -22,7 +22,7 @@ export default function Sorting({ className }) {
               name={sortType.name}
               value={sortType.value}
               defaultChecked={sortType.id === currentSortType.id}
-              onChange={(evt) => dispatch(changeSortTypeAction(SortType[evt.target.value]))}
+              onChange={(evt) => dispatch(changeActionSortType(SortType[evt.target.value]))}
             />
             <label className={classes['sorting__label']} htmlFor={sortType.id}>
               {sortType.text}

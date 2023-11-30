@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import { changeFilterTypeAction } from '../../store/reducer'
+import { changeActionFilterType } from '../../store/reducer'
 import { FilterType } from '../../constants'
 
 import classes from './Filters.module.scss'
@@ -43,7 +43,7 @@ export default function Filters({ className }) {
       }
     }
 
-    dispatch(changeFilterTypeAction(updatedFilters))
+    dispatch(changeActionFilterType(updatedFilters))
   }
 
   return (

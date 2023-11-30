@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 
-import { setTicketsAction, toggLoadingAction, changeLoadingProgressAction, setErrorAction } from './reducer'
+import { setActionTickets, toggActionLoading, changeActionLoadingProgress, setActionError } from './reducer'
 
 async function fetchTickets(searchId, api, prevTickets, dispatch) {
   try {
@@ -8,10 +8,10 @@ async function fetchTickets(searchId, api, prevTickets, dispatch) {
     const newTickets = data.tickets.map((ticket) => ({ ...ticket, id: nanoid() }))
     const tickets = [...prevTickets, ...newTickets]
 
-    if (!prevTickets.length) dispatch(toggLoadingAction())
+    if (!prevTickets.length) dispatch(toggActionLoading())
 
-    dispatch(setTicketsAction(tickets))
-    dispatch(changeLoadingProgressAction(tickets.length))
+    dispatch(setActionTickets(tickets))
+    dispatch(changeActionLoadingProgress(tickets.length))
 
     if (!data.stop) {
       return await fetchTickets(searchId, api, tickets, dispatch)
@@ -24,8 +24,8 @@ async function fetchTickets(searchId, api, prevTickets, dispatch) {
     if (response && response.status === 500) {
       return await fetchTickets(searchId, api, prevTickets, dispatch)
     } else {
-      dispatch(toggLoadingAction())
-      dispatch(setErrorAction(err))
+      dispatch(toggActionLoading())
+      dispatch(setActionError(err))
       return Promise.resolve(prevTickets)
     }
   }
@@ -38,8 +38,8 @@ export function fetchAllTickets() {
       const searchId = searhResponse.data.searchId
       fetchTickets(searchId, api, [], dispatch)
     } catch (err) {
-      dispatch(toggLoadingAction())
-      dispatch(setErrorAction(err))
+      dispatch(toggActionLoading())
+      dispatch(setActionError(err))
     }
   }
 }

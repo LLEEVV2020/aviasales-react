@@ -12,7 +12,7 @@ const initialState = {
   error: null,
 }
 
-function getFilteredTickets(tickets, filters) {
+function getTicketsFiltered(tickets, filters) {
   const currentFilters = Object.values(FilterType).filter((el) => filters.find((filter) => filter.value === el.value))
   let filteredTickets = []
 
@@ -88,7 +88,7 @@ function getSortedTickets(tickets, sortType) {
 }
 
 function getCurrentTickets(tickets, sortType, filters) {
-  const filteredTickets = getFilteredTickets(tickets, filters)
+  const filteredTickets = getTicketsFiltered(tickets, filters)
   const sortedAndFilteredTickets = getSortedTickets(filteredTickets, sortType)
 
   return sortedAndFilteredTickets
@@ -98,40 +98,40 @@ export const flightsSlice = createSlice({
   name: 'flights',
   initialState,
   reducers: {
-    changeFilterTypeAction: (state, action) => {
+    changeActionFilterType: (state, action) => {
       state.filters = action.payload
       const currentState = current(state)
       state.currentTickets = getCurrentTickets(currentState.tickets, currentState.sortType, currentState.filters)
     },
-    changeSortTypeAction: (state, action) => {
+    changeActionSortType: (state, action) => {
       state.sortType = action.payload
       const currentState = current(state)
       state.currentTickets = getCurrentTickets(currentState.tickets, currentState.sortType, currentState.filters)
     },
-    setTicketsAction: (state, action) => {
+    setActionTickets: (state, action) => {
       state.tickets = action.payload
       const currentState = current(state)
       state.currentTickets = getCurrentTickets(currentState.tickets, currentState.sortType, currentState.filters)
     },
-    toggLoadingAction: (state) => {
+    toggActionLoading: (state) => {
       state.isDataLoadig = !state.isDataLoadig
     },
-    changeLoadingProgressAction: (state, action) => {
+    changeActionLoadingProgress: (state, action) => {
       state.loadingProgress = Math.round((action.payload / TOTAL_TICKET_AMOUNT) * 100)
     },
-    setErrorAction: (state, action) => {
+    setActionError: (state, action) => {
       state.error = action.payload
     },
   },
 })
 
 export const {
-  changeFilterTypeAction,
-  changeSortTypeAction,
-  setTicketsAction,
-  toggLoadingAction,
-  changeLoadingProgressAction,
-  setErrorAction,
+  changeActionFilterType,
+  changeActionSortType,
+  setActionTickets,
+  toggActionLoading,
+  changeActionLoadingProgress,
+  setActionError,
 } = flightsSlice.actions
 
 export default flightsSlice.reducer
