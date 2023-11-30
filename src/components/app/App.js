@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Progress } from 'antd'
+import { Progress, Spin, Space, Alert } from 'antd'
 
 import Logo from '../Logo'
 import Filters from '../Filters'
@@ -40,7 +40,15 @@ function App() {
             strokeColor={'#2196F3'}
             style={progressStyles}
           />
-          <Airlines />
+          {isLoading ? (
+            <Space className={classes['app__spinner-container']}>
+              <Spin size="large" />
+            </Space>
+          ) : isError ? (
+            <Alert message={errorMessage} description={errorDesc} type="error" />
+          ) : (
+            <Airlines />
+          )}
         </div>
       </div>
     </section>
